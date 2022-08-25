@@ -1,30 +1,32 @@
-// Write your helper functions here!
-// require('isomorphic-fetch');
 
-// const pilotName = document.getElementById("pilotName");
-// const copilotName = document.getElementById("co-pilot");
-// const fuelLevel = document.getElementById[0];
-// const cargoMass = document.getElementById[0];
-
+const pilotName = document.querySelector('input[name="pilotName"]');
+const copilotName = document.querySelector('input[name="copilotName"]');
+const fuelLevel = document.querySelector('input[name="fuelLevel"]');
+const cargoMass = document.querySelector('input[name="cargoMass"]');
 
 // Write your helper functions here!
 require('isomorphic-fetch');
 
-function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-   // Here is the HTML formatting for our mission target div.
-   /*
-                <h2>Mission Destination</h2>
-                <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
-                    <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
-                </ol>
-                <img src="">
-   */
-}
+function addDestinationInfo(document, name, diameter, star, distance, moons, image) {
 
+   // Here is the HTML formatting for our mission target div.
+   
+let missionTarget = document.getElementById('missionTarget');
+
+
+missionTarget.innerHTML =
+               `<h2>Mission Destination</h2>
+                <ol>
+                    <li>Name: ${name}</li>
+                    <li>Diameter: ${diameter}</li>
+                    <li>Star: ${star}</li>
+                    <li>Distance from Earth: ${distance}</li>
+                    <li>Number of Moons: ${moons}</li>
+                </ol>
+                <img src="${image}">`
+                
+}
+              
 // validateInput() should take in a string as a parameter and return "Empty", "Not a Number", or "Is a Number"
 function validateInput(testInput) {
 
@@ -49,37 +51,18 @@ function validateInput(testInput) {
 // formSubmission() will take in a document parameter and strings representing the pilot, co-pilot, fuel level, and cargo mass.
 
 
-// const validateInputs = () => {
-//   const pilotValue = pilot.value.trim();
-//   const coPilotValue = coPilot.value.trim();
-//   const fuelLevelValue = fuelLevel.value.trim();
-//   const cargoMassValue = cargoMass.value.trim();
+function formSubmission(document, pilotName, copilotName, fuelLevel, cargoMass) {
 
-// }
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+  document.getElementById('pilotStatus').innerHTML = `Pilot ${ pilotName + ' '}Ready`
+  document.getElementById('copilotStatus').innerHTML = `Co-pilot ${ copilotName + ' '}Ready`
 
-  const formSubmit = document.getElementById("formSubmit");
-
-  formSubmit.addEventListener("click"), function(event){ 
-
-    const pilotValue = document.getElementById("pilotName");
-    const coPilotValue = document.getElementById("copilotName");
-    const fuelLevelValue = docuament.getElementById("fuelLevel");
-    const cargoMassValue = document.getElementById("cargoMass");
-
+  let form = document.querySelector("form");
     
-
-    event.preventDefault();
-  }
-
-    if(pilotValue === '' || pilotValue === null || coPilotValue === '' || coPilotValue === null || fuelLevelValue === '' || fuelLevelValue === isNaN || cargoMassValue === '' || cargoMassValue === isNaN  ) {
+    if(pilotName === '' || pilotName === null || copilotName === '' || copilotName === null || fuelLevel === '' || fuelLevel === isNaN || cargoMass === '' || cargoMass === isNaN  ) {
 
       alert("All fields are required");
       faultyItems.style.visibility = 'hidden';
       
-      // return false;
-
-      // launchStatus.style.color = 'black';
 			launchStatus.innerHTML = 'Awaiting Information Before Launch';
 
      } else {
@@ -90,10 +73,9 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   let fuelStatus = document.getElementById('fuelStatus');
   let cargoStatus = document.getElementById('cargoStatus')
   let ready = true;
-  document.getElementById('pilotStatus').innerHTML = `Pilot ${ pilotName + 'Ready' }`
-  document.getElementById('copilotStatus').innerHTML = `Co-pilot ${ copilotName + 'Ready' }`
 
-      faultyItems.style.visibility = 'visible';
+ faultyItems.style.visibility = 'visible';
+
 // Using template literals, update the li elements pilotStatus and copilotStatus to include the pilot's name and the co-pilot's name.
 
 // If the user submits a fuel level that is too low (less than 10,000 liters), change faultyItems to visible with an updated fuel status stating that there is not enough fuel for the journey. The text of the h2 element, launchStatus, should also change to "Shuttle not ready for launch" and the color should change to red.
@@ -106,15 +88,15 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 				launchStatus.innerHTML = 'Shuttle Not Ready for Launch';
 
 			} else {
-        document.getElementById('pilotStatus').innerHTML = `Pilot ${ pilotName + 'is ready for launch' }`
-        document.getElementById('copilotStatus').innerHTML = `Co-pilot ${ copilotName + 'is ready for launch' }`
+        document.getElementById('pilotStatus').innerHTML = `Pilot ${ pilotName + ' '}is ready for launch`
+        document.getElementById('copilotStatus').innerHTML = `Co-pilot ${ copilotName + ' '}is ready for launch`
         fuelStatus.innerHTML = 'Fuel level high enough for launch';
 
 			}
 
 
 // If the user submits a cargo mass that is too large (more than 10,000 kilograms), change the list to visible with an updated cargo status stating that there is too much mass for the shuttle to take off. The text of launchStatus should also change to "Shuttle not ready for launch" and the color should change to red.
-			if (cargoMassValue > 10000) {
+			if (cargoMass > 10000) {
 				ready = false;
 
 				cargoStatus.innerHTML = 'Cargo mass too heavy for launch';
@@ -123,8 +105,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 				launchStatus.innerHTML = 'Shuttle Not Ready for Launch';
 
 			} else {
-        document.getElementById('pilotStatus').innerHTML = `Pilot ${ pilotName + 'is ready for launch' }`
-        document.getElementById('copilotStatus').innerHTML = `Co-pilot ${ copilotName + 'is ready for launch' }`
+        document.getElementById('pilotStatus').innerHTML = `Pilot ${ pilotName + ' '}is ready for launch`
+        document.getElementById('copilotStatus').innerHTML = `Co-pilot ${ copilotName + ' '}is ready for launch`
 				cargoStatus.innerHTML = 'Cargo mass low enough for launch';
 
 			}
@@ -134,38 +116,34 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 			if (ready) {
 
 
-        document.getElementById('pilotStatus').innerHTML = `Pilot ${ pilotName + 'is ready for launch' }`
-        document.getElementById('copilotStatus').innerHTML = `Co-pilot ${ copilotName + 'is ready for launch' }`
+        document.getElementById('pilotStatus').innerHTML = `Pilot ${ pilotName + ' '}is ready for launch`
+        document.getElementById('copilotStatus').innerHTML = `Co-pilot ${ copilotName + ' '}is ready for launch`
         launchStatus.style.color = 'green';
 				launchStatus.innerHTML = 'Shuttle is Ready for Launch';
 
 			} 
-   } 
-   
+   }    
 
 }
-
 
 
 async function myFetch() {
     let planetsReturned;
-
-    planetsReturned = await fetch().then( function(response) {
+    let url = "https://handlers.education.launchcode.org/static/planets.json";
+    planetsReturned = await fetch(url).then( function(response) {
+      return response.json();
         });
 
     return planetsReturned;
-}
-
-
-
-
+} 
 
 
 function pickPlanet(planets) {
+  let planetsArray = planets;
+  let randomPlanets = Math.round(Math.random() * planets.length);
+return planetsArray[randomPlanets];
+  
 }
-
-
-
 
 
 
